@@ -1,0 +1,23 @@
+// 1: Eigen variabelen
+$success: #ffb703;
+$warning: #fb8500;
+
+// 2: Importeer Bootstrap functies en variabelen
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+$custom-theme-smartfalt:(
+    cornflower: #8ecae6,
+    bluegreen: #219ebc,
+    prussian: #023047,
+    selective: #ffb703,
+    tangerine: #fb8500
+);
+
+// 3: Voeg eigen thema toe aan de bestaande bootstrap thema
+$theme-colors: map-merge($custom-theme-smartfalt, $theme-colors);
+
+// 4: Importeer bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Let op: in een array altijd komma's gebruiken (key-value pairing) in plaats van puntkomma!
