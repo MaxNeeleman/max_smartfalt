@@ -510,6 +510,12 @@
       </section>
 
     <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require './PHPMailer/src/Exception.php';
+    require './PHPMailer/src/PHPMailer.php';
+    require './PHPMailer/src/SMTP.php';
 
     if(isset($_POST['Email']) && $_POST['Email'] != ''){
 
@@ -520,17 +526,20 @@
         $telefoonNummer = $_POST['Telefoonnummer'];
         $bericht = $_POST['Bericht'];
   
-        $to = "smartfalt@neeleman.mozmail.com";
-        $subject = "Nieuwe mail!";
-        $body = "";
-  
-        $body .= "Van: ".$naam. "\r\n";
-        $body .= "Email: ".$email. "\r\n";
-        $body .= "Telefoonnummer: ".$telefoonNummer. "\r\n";
-        $body .= "Bericht: ".$bericht. "\r\n";
-  
-        mail($to,$subject,$body);
-
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'maxneeleman1999@gmail.com';
+        $mail->Password = 'mnrnhpyghbfqhamn';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->isHTML(true);
+        $mail->setFrom('maxneeleman1999@gmail.com', 'smartfalt');
+        $mail->addAddress($email, $naam);
+        $mail->Subject = ("$email ("Nieuwe Mail!")");
+        $mail->Body = $bericht;
+        $mail->send();
       }
     }
     ?>
