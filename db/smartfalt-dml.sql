@@ -5,12 +5,19 @@ USE `SMARTFALT`;
 
 INSERT INTO `ROLLEN` (`RolId`, `TypeRol`) VALUES ('1', 'Administrator'), ('2', 'Werknemer'), ('3', 'Klant'), ('4', 'Leverancier');
 
-INSERT INTO `ACCOUNTS` (`AccountId`, `Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `RolId`, `IBAN`)
-VALUES  ('1017', 'gvhamsteren', 'H@mst3r3n!', 'Gerrit', 'Hamsteren, van', 'm', 'Hamsterdam', '1200AA', '2001-03-24', 'gvhamsteren@mail.ru', '+316123789456', '3', 'NL91ABNA0417164300'),
-        (NULL, 'prutten', 'Dit is niet jouw wachtwoord, vriend', 'Paul', 'Rutten', 'm', 'Dordrecht', '3315ZA', '1981-07-22', 'p.rutten@smartfalt.nl', '+314563423343', '4', 'NL52INGB0000000000'),
-        (NULL, 'mneeleman', 'Wormlifematters', 'Max', 'Neeleman', 'm', 'Nijbijgelegen', '1234AA', '1999-12-07', 'm.neeleman@smartfalt.nl', '+31621343129', '2', 'NL31RABO0123456789'),
-        (NULL, 'nrattansingh', 'Ja toch, niet dan?', 'Neesha', 'Rattansingh', 'v', 'Rotterdam', '3300ZX', '2001-08-19', 'n.rattansingh@smartfalt.nl', '+313452345234', '2', 'NL90SNSB0918273645'),
-        (NULL, 'drisovic', 'JavaScriptM@ster123', 'Denis', 'Risovic', 'm', 'Zwijndrecht', '3350GS', '1998-10-03', 'd.risovic@smartfalt.nl', '+31322345232', '3', 'NL73KNAB0604511557');
+INSERT INTO `ACCOUNTS` (`AccountId`, `Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Adres`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `IBAN`, `RolId`)
+VALUES
+    ('00001018','psmit', 'password2', 'Pieter', 'Smit', 'M', 'Hoofdweg 10', 'Rotterdam', '3011BB', '1972-12-02', 'psmit@email.nl', '0623456789', 'NL03ABNA0234567890', 2),
+    ('00001017','jdevries', 'password1', 'Jan', 'de Vries', 'M', 'Kerkstraat 1', 'Amsterdam', '1011AA', '1985-01-20', 'jdevries@email.nl', '0612345678', 'NL02ABNA0123456789', 1),
+    ('00001019','mdejong', 'password3', 'Marieke', 'de Jong', 'F', 'Dorpsstraat 20', 'Utrecht', '3511CC', '1980-03-03', 'mdejong@email.nl', '0634567890', 'NL04ABNA0345678901', 3),
+    ('00001020','kvandijk', 'password4', 'Klaas', 'van Dijk', 'M', 'Nieuwstraat 30', 'Den Haag', '2511DD', '1990-04-04', 'kvandijk@email.nl', '0645678901', 'NL05ABNA0456789012', 4),
+    ('00001021','vdeboer', 'password5', 'Vera', 'de Boer', 'F', 'Schoolstraat 40', 'Groningen', '9711EE', '1987-05-05', 'vdeboer@email.nl', '0656789012', 'NL06ABNA0567890123', 1),
+    ('00001022','bmeijer', 'password6', 'Bram', 'Meijer', 'M', 'Kanaalstraat 50', 'Eindhoven', '5611FF', '1992-06-06', 'bmeijer@email.nl', '0667890123', 'NL07ABNA0678901234', 2),
+    ('00001023','fvanbeek', 'password7', 'Femke', 'van Beek', 'F', 'Molenweg 60', 'Tilburg', '6011GG', '1993-07-07', 'fvanbeek@email.nl', '0678901234', 'NL08ABNA0789012345', 3),
+    ('00001024','gdehaan', 'password8', 'Gerard', 'de Haan', 'M', 'Marktstraat 70', 'Almere', '1311HH', '1991-08-08', 'gdehaan@email.nl', '0689012345', 'NL09ABNA0890123456', 4),
+    ('00001025','hvandam', 'password9', 'Hanneke', 'van Dam', 'F', 'Stationsweg 80', 'Breda', '4811II', '1986-09-09', 'hvandam@email.nl', '0690123456', 'NL10ABNA0901234567', 1),
+    ('00001026','jvisser', 'password10', 'Joost', 'Visser', 'M', 'Beekstraat 90', 'Nijmegen', '5911JJ', '1984-10-10', 'jvisser@email.nl', '0701234567', 'NL11ABNA1012345678', 2);
+
 
 INSERT INTO `ABONNEMENTTYPES` (`TypeId`, `Omschrijving`, `Looptijd`, `Prijs`) VALUES
 (1, 'Evenement', 'Eenmalig', 500.00),

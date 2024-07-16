@@ -5,26 +5,44 @@
             <div class="carousel-item active">
               <!-- (C) Joshua Woroniecki - Unsplash: https://unsplash.com/@joshua_j_woroniecki -->
               <img src="https://images.unsplash.com/photo-1593571560705-aeb8f2e978f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGhpZ2h3YXl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="carousel-img vh-100 vw-100" alt="Lange rechte weg met dubbele gele middellijn in bosrijk gebied" />
+              <div class="carousel-caption d-none d-md-block">
+                <h2 class="text-selective text-outline"><strong>SMARTFALT</strong></h3>
+              </div>
             </div>
             <div class="carousel-item">
               <!-- (C) Alex Woods - Unsplash: https://unsplash.com/@alexwoods -->
               <img src="https://images.unsplash.com/photo-1537219921863-2453086934cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YXNwaGFsdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" class="carousel-img vh-100 vw-100" alt="Close up van asfalt, laat het textuur van asfalt zien" />
+              <div class="carousel-caption d-none d-md-block">
+                <h2 class="text-selective text-outline"><strong>IS DE WEG NAAR DE TOEKOMST</strong></h3>
+              </div>
             </div>
             <div class="carousel-item">
               <!-- (C) Maick Maciel - Unsplash: https://unsplash.com/@maickmacielfotos -->
               <img src="https://images.unsplash.com/photo-1615240404018-826fd3164ee5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGhpZ2h3YXl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="carousel-img vh-100 vw-100" alt="Foto van een snelweg, genomen met een lange sluitertijd zodat er strepen van voorbijrijdende auto's te zien is" />
+              <div class="carousel-caption d-none d-md-block">
+                <h2 class="text-selective text-outline"><strong>MET INNOVATIEVE OPLOSSINGEN</strong></h3>
+              </div>
             </div>
             <div class="carousel-item">
               <!-- (C) Peter Werkman - Unsplash: https://unsplash.com/@pwphotography -->
               <img src="https://images.unsplash.com/photo-1641652333280-2e03b73f32ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fHJvYWR3b3Jrc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" class="carousel-img vh-100 vw-100" alt="Foto van geleiderails langs een brug over het water" />
+              <div class="carousel-caption d-none d-md-block">
+                <h2 class="text-selective text-outline"><strong>SAMENWERKINGEN MET OVERHEDEN EN AANNEMERS</strong></h3>
+              </div>
             </div>
             <div class="carousel-item">
               <!-- (C) Brendan Beale - Unsplash: https://unsplash.com/@theophilus318 -->
               <img src="https://images.unsplash.com/photo-1611706313843-ff7e42b84e9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGZyZWV3YXl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" class="carousel-img vh-100 vw-100" alt="Verkeersknooppunt met een aantal lagen van fly-overs, Amerikaanse snelweg" />
+              <div class="carousel-caption d-none d-md-block">
+                <h2 class="text-selective text-outline"><strong>BRENGT DATA EN MOBILITEIT SAMEN</strong></h3>
+              </div>
             </div>
             <div class="carousel-item">
               <!-- (C) Kuan Fang - Unsplash: https://unsplash.com/@fangkuan -->
               <img src="https://images.unsplash.com/photo-1494778924281-cce023ab1acb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" class="carousel-img vh-100 vw-100" alt="Graafmachine met graafmond op het asfalt" />
+              <div class="carousel-caption d-none d-md-block">
+                <h2 class="text-selective text-outline"><strong>ENERGIEOPWEKKING MET ZON EN WIND</strong></h3>
+              </div>
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselSmartFaltDiensten" data-bs-slide="prev">
@@ -46,7 +64,7 @@
         <hr>
         <div class="container text-start" id="section-statement">
           <h2 class="text-selective">Onze missie</h2>
-          <p class="statement-p">Smartfalt heeft als missie om innovaties toegankelijk te maken voor de mobiele burger.</p>
+          <p class="statement-p" id="missie">Smartfalt heeft als missie om innovaties toegankelijk te maken voor de mobiele burger.</p>
           <button id="btnMissie" type="button" class="btn btn-selective m-1 text-start">
             <i class="bi bi-chevron-right"></i> Lees meer over onze missie
           </button>
@@ -55,7 +73,7 @@
           </button>
           <hr />
           <h2 class="text-selective">Onze visie</h2>
-          <p class="statement-p">Wij streven ernaar om de infrastructuur veiliger, duurzamer en slimmer te maken.</p>
+          <p class="statement-p" id="visie">Wij streven ernaar om de infrastructuur veiliger, duurzamer en slimmer te maken.</p>
           <button id="btnVisie" type="button" class="btn btn-selective m-1 text-start">
             <i class="bi bi-chevron-right"></i> Lees meer over onze visie
           </button>
@@ -64,7 +82,7 @@
           </button>
           <hr />
           <h2 class="text-selective">Onze strategie</h2>
-          <p class="statement-p">Onze strategie richt zich op het onderzoeken van bestaande en slimme innovaties die toepasbaar zijn binnen het huidige wegennetwerk.</p>
+          <p class="statement-p" id="strategie">Onze strategie richt zich op het onderzoeken van bestaande en slimme innovaties die toepasbaar zijn binnen het huidige wegennetwerk.</p>
           <button id="btnStrategie" type="button" class="btn btn-selective m-1 text-start">
             <i class="bi bi-chevron-right"></i> Lees meer over onze strategie
           </button>
@@ -82,7 +100,7 @@
         <hr>
         <!-- CARDS -->
         <div class="container">
-          <h3 class="text-center pt-2"><span class="bg-selective rounded-5 p-3 text-nowrap">Abonnementen</span></h3>
+          <h3 class="text-center pt-2"><span class="bg-selective rounded-5 p-3 text-nowrap border border-dark">Abonnementen</span></h3>
 
           <!-- CARD CONTAINER -->
           <div class="mt-5 d-flex flex-row flex-wrap justify-content-center">
@@ -161,11 +179,11 @@
         <hr>
 
         <!-- CALCULATOR CONTAINER -->
-        <div class="container">
-          <h3 class="text-center pt-2"><span class="bg-selective rounded-5 p-3 text-nowrap">Totaalprijs</span></h3>
+        <div class="container bg-cornflower border border-dark">
+          <h3 class="text-center pt-2"><span class="bg-selective rounded-5 p-3 text-nowrap border border-dark">Totaalprijs</span></h3>
 
           <!-- PACAKGES -->
-          <form class="calculator mt-5">
+          <form class="calculator mt-5 text-prussian">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="selectedpakket" id="startpakket1" value="startpakket1" onclick="calculateTotal()" />
               <label class="form-check-label" for="startpakket1">
@@ -225,7 +243,7 @@
           <!-- KILOMETERS -->
 
           <!-- PRICE -->
-          <div class="prijsopgave">
+          <div class="text-dark fw-bold my-2">
             Meer dan 100 kilometer? Neem contact met ons op voor een prijsopgave.
           </div>
 
@@ -253,7 +271,7 @@
               <div class="flex-grow-1">
                 <div class="card-body">
                   <h5 class="card-title fw-bold text-outline">Paul Rutten</h5>
-                  <p class="card-text fw-light">De denktank.</p>
+                  <p class="card-text fw-bold text-prussian">De denktank.</p>
                 </div>
             </div>
               <div class="card-body">
@@ -282,7 +300,7 @@
               <div class="flex-grow-1">
                 <div class="card-body">
                   <h5 class="card-title fw-bold text-outline">Denis Risovic</h5>
-                  <p class="card-text fw-light">De designer.</p>
+                  <p class="ard-text fw-bold text-prussian">De designer.</p>
                 </div>
               </div>
               <div class="card-body">
@@ -311,7 +329,7 @@
               <div class="flex-grow-1">
                 <div class="card-body">
                   <h5 class="card-title fw-bold text-outline">Neesha Rattansingh</h5>
-                  <p class="card-text fw-light">De spellingschecker.</p>
+                  <p class="ard-text fw-bold text-prussian">De spellingschecker.</p>
                 </div>
               </div>
               <div class="card-body">
@@ -340,7 +358,7 @@
               <div class="flex-grow-1">
                 <div class="card-body">
                   <h5 class="card-title fw-bolder text-outline">Max Neeleman</h5>
-                  <p class="card-text fw-light">De bugfixer.</p>
+                  <p class="ard-text fw-bold text-prussian">De bugfixer.</p>
                 </div>
               </div>
               <div class="card-body">
@@ -474,7 +492,7 @@
                 <p>Of JavaScript werkt niet...</p>
                 <p>Hier is wel een plaatje van een kat:</p>
                 <!-- (C) https://thecatapi.com/ -->
-                <img src="https://thecatapi.com/api/images/get?format=src&type=gif">
+                <img src="https://thecatapi.com/api/images/get?format=src&type=gif" alt="Willekeurige afbeelding van een kat">
               </div>
             </div>
           </div>
@@ -487,7 +505,7 @@
         <h2 class="text-outline"><strong>Contactformulier</strong></h2>
         <hr>
         <div class="container">
-          <form action="index.php" method="POST">
+          <form action="mail_succes.php" method="POST">
             <div class="input-group mb-1">
               <input class="form-control rounded" type="text" name="Naam" id="Naam" placeholder="Naam" required />
             </div>
@@ -509,70 +527,25 @@
         </div>
       </section>
 
-    <?php
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-
-    require './PHPMailer/src/Exception.php';
-    require './PHPMailer/src/PHPMailer.php';
-    require './PHPMailer/src/SMTP.php';
-
-    if(isset($_POST['Email']) && $_POST['Email'] != ''){
-
-      if( filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL) ){
-
-        $naam = $_POST['Naam'];
-        $email = $_POST['Email'];
-        $telefoonNummer = $_POST['Telefoonnummer'];
-        $bericht = $_POST['Bericht'];
-  
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'maxneeleman1999@gmail.com';
-        $mail->Password = 'mnrnhpyghbfqhamn';
-        $mail->Port = 465;
-        $mail->SMTPSecure = 'ssl';
-        $mail->isHTML(true);
-        $mail->setFrom('maxneeleman1999@gmail.com', 'smartfalt');
-        $mail->addAddress($email, $naam);
-        $mail->Subject = ("$email ("Nieuwe Mail!")");
-        $mail->Body = $bericht;
-        $mail->send();
-      }
-    }
-    ?>
-
-
-
       <!-- /CONTACT FORM  -->
 
       <!-- NIEUWSBRIEF -->
       <section id="section-nieuwsbrief" class="p-5 bg-bluegreen">
-        <h2 class="text-outline"><strong>Nieuwsbrief</strong></h2>
+        <h2 class="text-outline"><strong>Extra informatie?</strong></h2>
         <hr>
         <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <form method="post">
-                <div class="form-group niewsbrief-input">
-                  <label for="input-email" class="form-label" hidden>
-                    E-mailadres
-                  </label>
-                  <div class="input-group" data-validate="email">
-                    <input type="email" class="form-control item rounded mb-1" id="input-email" placeholder="Vul hier je emailadres in.." required />
-                    <div class="invalid-feedback">Onjuist e-mailadres..</div>
-                    <button class="btn btn-selective btn-lg mb-1 rounded" type="button" id="btnNieuwsbrief" data-bs-toggle="modal" data-bs-target="#modal-nieuwsbrief">
-                      Verzenden
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+          <form action="mail_succes.php" method="POST">
+              <div class="input-group mb-1">
+                <input type="email" class="form-control item rounded mb-1" name="input-email" id="input-email" placeholder="Vul hier je emailadres in.." required />
+                <button class="btn btn-selective btn-lg mb-1 rounded" type="submit">
+                  Verzenden
+                </button>
+              </div>
+             </div>
+          </form>
         </div>
       </section>
+
       <!-- /NIEUWSBRIEF -->
 
       <!-- MODAL: Offerte aanvragen -->
@@ -622,6 +595,7 @@
       <!-- /MODAL: Offerte aanvragen -->
 
       <!-- MODAL: Nieuwsbrief aanvragen -->
+      <!--
       <div class="modal fade" id="modal-nieuwsbrief" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -642,4 +616,5 @@
           </div>
         </div>
       </div>
+      -->
       <!-- /MODAL: Nieuwsbrief aanvragen -->

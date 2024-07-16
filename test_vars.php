@@ -39,7 +39,7 @@
         </section>
         <hr>
         <section>
-            <h2>$_SERVER variables</h2>
+            <h2>$_SERVER attributes</h2>
             <table>
                 <thead>
                     <tr>
@@ -49,10 +49,10 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($_SERVER as $parm => $value) {
+                        foreach ($_SERVER as $param => $value) {
                     ?>
                         <tr>
-                            <td><strong><?php echo $parm; ?></strong></td>
+                            <td><strong><?php echo $param; ?></strong></td>
                             <td><em><?php echo $value; ?></em></td>
                         </tr>
                     <?php
@@ -73,7 +73,7 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach (get_loaded_extensions() as $ext) {
+                        foreach (get_loaded_extensions() as $ext) {
                     ?>
                         <tr>
                             <td><strong><?php echo $ext; ?></strong></td>

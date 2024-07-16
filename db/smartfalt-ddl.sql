@@ -14,20 +14,23 @@ CREATE TABLE `ROLLEN` (
 
 CREATE TABLE `ACCOUNTS` (
     `AccountId` INT(8) ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `Profielfoto` BLOB,
     `Gebruikersnaam` VARCHAR(30) NOT NULL,
     `Wachtwoord` VARCHAR(64) NOT NULL,
     `Voornaam` VARCHAR(30),
     `Achternaam` VARCHAR(50),
     `Geslacht` VARCHAR(1),
+    `Adres` VARCHAR(250),
     `Woonplaats` VARCHAR(50),
     `Postcode` VARCHAR(6),
     `GebDatum` DATE,
     `Emailadres` VARCHAR(50) NOT NULL,
     `Telefoonnummer` VARCHAR(15),
-    `RolId` INT(1),
     `IBAN` VARCHAR(18),
+    `RolId` INT(1),
     CONSTRAINT `fk_Accounts_Rollen` FOREIGN KEY (`RolId`) REFERENCES `ROLLEN`(`RolId`) ON UPDATE CASCADE ON DELETE SET NULL
 );
+
 
 CREATE TABLE `ABONNEMENTTYPES` (
     `TypeId` INT(1) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -70,6 +73,18 @@ CREATE TABLE `FACTUREN` (
     CONSTRAINT `fk_Facturen_Bestellingen` FOREIGN KEY (`BestellingId`) REFERENCES `BESTELLINGEN`(`BestellingId`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
+CREATE TABLE `AFBEELDINGEN` (
+    `PictureId` INT(8) ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `AccountId` INT(8) ZEROFILL,
+    `ProfilePicture` LONGBLOB,
+    CONSTRAINT `fk_ProfilePictures_Accounts` FOREIGN KEY (`AccountId`) REFERENCES `ACCOUNTS`(`AccountId`) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+CREATE TABLE `ZOEKEN` (
+    `ZoekId` INT(10) ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `ZoekOpdracht` TEXT NOT NULL
+);
+
 /*
  Alternatieve methode om PRIMARY of FOREIGN KEY kolommen aan te maken:
 
@@ -98,12 +113,12 @@ CREATE PROCEDURE MaakAccount (
     IN `GebDatum` DATE,
     IN `Emailadres` VARCHAR(50),
     IN `Telefoonnummer` VARCHAR(15),
-    IN `RolId` INT(1),
-    IN `IBAN` VARCHAR(18)
+    IN `IBAN` VARCHAR(18),
+    IN `RolId` INT(1)
 )
 BEGIN
-    INSERT INTO `ACCOUNTS` (`AccountId`, `Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `RolId`, `IBAN`)
-    VALUES (`AccountId`, `Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `RolId`, `IBAN`);
+    INSERT INTO `ACCOUNTS` (`AccountId`, `Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `IBAN`, `RolId`)
+    VALUES (`AccountId`, `Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `IBAN`, `RolId`);
 END$$
 DELIMITER ;
 

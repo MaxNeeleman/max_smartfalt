@@ -1,5 +1,42 @@
 <?php
-    // START SESSION
+    class User {
+        private $pdo;
+        private $accountid;
+
+        // NEW PDO
+        public function __construct($pdo, $accountid) {
+            $this->pdo = $pdo;
+            $this->accountid = $accountid;
+        }
+
+        // GET ACCOUNT
+        public function fetchAccount() {
+            $stmt = $this->pdo->prepare("SELECT * FROM `accounts` WHERE `AccountId` = :accountid");
+            $stmt->bindParam(':accountid', $this->accountid, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        // UPDATE ACCOUNT
+        public function updateAccount($accountData) {
+            $update_sql = 
+               "UPDATE `accounts` 
+                SET `Gebruikersnaam` = :username, `Wachtwoord` = :password, `Voornaam` = :firstname, `Achternaam` = :lastname, `Geslacht` = :gender, `Adres` = :address, `Woonplaats` = :city, `Postcode` = :zip, `GebDatum` = :dob, `Emailadres` = :mail, `Telefoonnummer` = :phone, `IBAN` = :iban, `RolId` = :rolid 
+                WHERE `AccountId` = :accountid;";
+            $stmt = $this->pdo->prepare($update_sql);
+        
+            $accountData['accountid'] = $this->accountid;
+        
+            // REPORTING
+            if ($stmt->execute($accountData)) {
+                return "Account bijgewerkt";
+            } else {
+                throw new Exception("Fout tijdens het bijwerken van account.");
+            }
+        }
+    }
+
+    // SESSION CONTROL
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -8,219 +45,223 @@
     require_once ('../config.php');
     $page_Title = "Smartfalt - Admin - Account Bewerken";
     $admin_page_title = '<a href="../index.php">Smartfalt</a> > <a href="index.php">Admin</a> > Account bewerken';
-    require_once ('../site/site_admin_header.php');
+    require_once ('../site/site_header_admin.php');
+    require_once ('../db/connect_' . $_SERVER['SERVER_NAME'] . '.php');
+    require_once ('../db/db_connect.php');
 
-    $id = $_GET['id'];
-
-    // CONNECT NAAR DB
-    try {
-        $connection = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-        $_SESSION['error_message'] = "Kan geen verbinding maken met de database: " . $e->getMessage();
+    // ERROR HANDLING
+    if (!isset($_GET['id'])) {
+        $_SESSION['error_message'] = "Er bestaat geen account met ID: $id";
         header("Location: account_error.php");
-        exit;
+        exit();
     }
 
-    // SUBMIT FORM
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = strip_tags(trim($_POST['username']));
-        $password = strip_tags(trim($_POST['password']));
-        $firstname = strip_tags(trim($_POST['firstname']));
-        $lastname = strip_tags(trim($_POST['lastname']));
-        $gender = strip_tags(trim($_POST['gender']));
-        $address = strip_tags(trim($_POST['address']));
-        $zip = strip_tags(trim($_POST['zip']));
-        $city = strip_tags(trim($_POST['city']));
-        $country = strip_tags(trim($_POST['country']));
-        $dob = strip_tags(trim($_POST['dob']));
-        $mail = strip_tags(trim($_POST['mail']));
-        $phone = strip_tags(trim($_POST['phone']));
-        $iban = strip_tags(trim($_POST['iban']));
+    // EDIT FORM FOR USER
+    $accountManager = new User($pdo, $_GET['id']);
 
-        $update_sql = "UPDATE `accounts` SET `Username` = :username, `Password` = :password, `Firstname` = :firstname, `Lastname` = :lastname, `Gender` = :gender, `Address` = :address, `Zip` = :zip, `City` = :city, `Country` = :country, `DOB` = :dob, `Mail` = :mail, `Phone` = :phone, `IBAN` = :iban WHERE `Id` = :id;";
-        $stmt = $connection->prepare($update_sql);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':firstname', $firstname);
-        $stmt->bindParam(':lastname', $lastname);
-        $stmt->bindParam(':gender', $gender);
-        $stmt->bindParam(':address', $address);
-        $stmt->bindParam(':zip', $zip);
-        $stmt->bindParam(':city', $city);
-        $stmt->bindParam(':country', $country);
-        $stmt->bindParam(':dob', $dob);
-        $stmt->bindParam(':mail', $mail);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':iban', $iban);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $account = $accountManager->fetchAccount();
+    if (!$account) {
+        $_SESSION['error_message'] = "Er bestaat geen account met ID: " . $_GET['id'];
+        header("Location: account_error.php");
+        exit;        
+    }
 
-        try {
-            if ($stmt->execute()) {
-                echo "Record updated successfully";
-            } else {
-                echo "Error updating record.";
-            }
-        } catch (PDOException $e) {
-            $_SESSION['error_message'] = "Foutmelding opgetreden: " . $e->getMessage();
-            header("Location: account_error.php");
-            exit;
+    // UPDATE USER
+    try {
+        $accountDataArray = [];
+        foreach ($_POST as $key => $value) {
+            $accountDataArray[$key] = strip_tags(trim($value));
         }
+        if (count($accountDataArray) > 0) {
+            echo $accountManager->updateAccount($accountDataArray);
+        }
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo "Foutmelding opgetreden: " . $e->getMessage();
     }
-
-    // SQL QUERY
-    $stmt = $connection->prepare("SELECT * FROM `accounts` WHERE `Id` = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    if($stmt->rowCount() == 0) {
-        // Zet error message in session
-        $_SESSION['error_message'] = "Er bestaat geen account met dit ID.";
-        header('Location: account_error.php');
-        exit;
-    }
-
-    // GET DATA
-    $account = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-
-
+        <!-- EDIT STYLE -->
+        <style>
+            body {
+                font-family: apertura, sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                max-width: 100%;
+                height: 100%;
+                padding-top: 80px;
+            }
+        </style>
+        <!-- /EDIT STYLE -->
+        
         <!-- EDIT FORM -->
-        <div class="container bg-cornflower rounded-3 my-5 p-3">
-            <form action="account_edit.php?id=<?php echo $id; ?>" method="POST">
-                <div class="form-group">
-                    <label class="text-prussian" for="username"><strong>Gebruikersnaam</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="username" name="username" value="<?php echo $account['Username']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="password"><strong>Wachtwoord</strong>:</label>
-                    <input type="password" class="form-control border border-dark" id="password" name="password" value="<?php echo $account['Password']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="firstname"><strong>Voornaam</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="firstname" name="firstname" value="<?php echo $account['Firstname']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="lastname"><strong>Achternaam</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="lastname" name="lastname" value="<?php echo $account['Lastname']; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="gender"><strong>Geslacht</strong>:</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender-m" value="M" <?php echo ($account['Gender'] === 'M') ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="gender-m">M (Man)</label>
+        <section id="section-account-edit">
+            <div class="container bg-cornflower rounded-3 my-5 p-3">
+                <form id="edit-form" action="account_edit.php?id=<?php echo $_GET['id']; ?>" method="POST">
+                    <div class="form-group">
+                        <label class="text-prussian" for="username"><span class="fw-bold">Gebruikersnaam<span>:</label>
+                        <input type="text" class="form-control border border-dark" id="username" name="username" value="<?php echo $account['Gebruikersnaam']; ?>">
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender-f" value="F" <?php echo ($account['Gender'] === 'F') ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="gender-f">F (Vrouw)</label>
+                    <div class="form-group">
+                        <label class="text-prussian" for="password"><span class="fw-bold">Wachtwoord<span>:</label>
+                        <input type="password" class="form-control border border-dark" id="password" name="password" value="<?php echo $account['Wachtwoord']; ?>">
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender-x" value="X" <?php echo ($account['Gender'] === 'X') ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="gender-x">X (Anders)</label>
+                    <div class="form-group">
+                        <label class="text-prussian" for="firstname"><span class="fw-bold">Voornaam<span>:</label>
+                        <input type="text" class="form-control border border-dark" id="firstname" name="firstname" value="<?php echo $account['Voornaam']; ?>">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="address"><strong>Adres</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="address" name="address" value="<?php echo $account['Address']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="zip"><strong>Postcode</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="zip" name="zip" value="<?php echo $account['Zip']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="city"><strong>Woonplaats</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="city" name="city" value="<?php echo $account['City']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="country"><strong>Land</strong>:</label>
-                    <input type="text" class="form-control border border-dark" id="country" name="country" value="<?php echo $account['Country']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="dob"><strong>Geboortedatum</strong>:</label>
-                    <input type="date" class="form-control border border-dark" id="dob" name="dob" value="<?php echo $account['DOB']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="mail"><strong>E-mailadres</strong>:</label>
-                    <input type="email" class="form-control border border-dark" id="mail" name="mail" value="<?php echo $account['Mail']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="phone"><strong>Telefoonnummer</strong>:</label>
-                    <input type="tel" class="form-control border border-dark" id="phone" name="phone" value="<?php echo $account['Phone']; ?>">
-                </div>
-                <div class="form-group">
-                    <label class="text-prussian" for="iban"><strong>IBAN</strong>:</label>
-                    <input type="tel" class="form-control border border-dark" id="iban" name="iban" value="<?php echo $account['IBAN']; ?>">
-                </div>
-                <button type="submit" id="submit-button" class="btn btn-selective border border-dark my-2"><strong>Indienen</strong></button>
-                <button type="button" class="btn btn-selective border border-dark m-2" onclick="goBack()"><strong>Terug</strong></button>
-            </form>
-        </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="lastname"><span class="fw-bold">Achternaam<span>:</label>
+                        <input type="text" class="form-control border border-dark" id="lastname" name="lastname" value="<?php echo $account['Achternaam']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender"><span class="fw-bold">Geslacht<span>:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="gender-m" value="M" <?php echo ($account['Geslacht'] === 'M') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="gender-m">M (Man)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="gender-f" value="F" <?php echo ($account['Geslacht'] === 'F') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="gender-f">F (Vrouw)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="gender-x" value="X" <?php echo ($account['Geslacht'] === 'X') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="gender-x">X (Anders)</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="address"><span class="fw-bold">Adres<span>:</label>
+                        <input type="text" class="form-control border border-dark" id="address" name="address" value="<?php echo $account['Adres']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="city"><span class="fw-bold">Woonplaats<span>:</label>
+                        <input type="text" class="form-control border border-dark" id="city" name="city" value="<?php echo $account['Woonplaats']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="zip"><span class="fw-bold">Postcode<span>:</label>
+                        <input type="text" class="form-control border border-dark" id="zip" name="zip" value="<?php echo $account['Postcode']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="dob"><span class="fw-bold">Geboortedatum<span>:</label>
+                        <input type="date" class="form-control border border-dark" id="dob" name="dob" value="<?php echo $account['GebDatum']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="mail"><span class="fw-bold">E-mailadres<span>:</label>
+                        <input type="email" class="form-control border border-dark" id="mail" name="mail" value="<?php echo $account['Emailadres']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="phone"><span class="fw-bold">Telefoonnummer<span>:</label>
+                        <input type="tel" class="form-control border border-dark" id="phone" name="phone" value="<?php echo $account['Telefoonnummer']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-prussian" for="iban"><span class="fw-bold">IBAN<span>:</label>
+                        <input type="tel" class="form-control border border-dark" id="iban" name="iban" value="<?php echo $account['IBAN']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="roleid"><span class="fw-bold">Rol<span>:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rolid" id="role-1" value="1" <?php echo ($account['RolId'] == '1') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="role-1">Administrator</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rolid" id="role-2" value="2" <?php echo ($account['RolId'] == '2') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="role-2">Medewerker</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rolid" id="role-3" value="3" <?php echo ($account['RolId'] == '3') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="role-3">Klant</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rolid" id="role-4" value="4" <?php echo ($account['RolId'] == '4') ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="role-4">Leverancier</label>
+                        </div>
+                    </div>
+                    <button type="submit" id="submit-button" class="btn btn-selective border border-dark my-2 fw-bold">Indienen</button>
+                    <button type="button" class="btn btn-selective border border-dark m-2 fw-bold" onclick="goBack()">Terug</button>
+                </form>
+            </div>
+        </section>
         <!-- /EDIT FORM -->
 
-        <!-- SCRIPT -->
+        <!-- EDIT FORM -->
+        <section id="section-account-edit">
+            <div class="container bg-cornflower rounded-3 my-5 p-3">
+                <form id="edit-form" action="account_edit.php?id=<?php echo $_GET['id']; ?>" method="POST">
+                            <button type="submit" id="submit-button" class="btn btn-selective border border-dark my-2 fw-bold">Indienen</button>
+                    <button type="button" class="btn btn-selective border border-dark m-2 fw-bold" onclick="goBack()">Terug</button>
+                </form>
+            </div>
+        </section>
+        <!-- /EDIT FORM -->
+
+        <!-- EDIT FORM SCRIPT -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            // Haal formulier gegevens op
-            var form = document.querySelector('form');
-            var submitButton = document.getElementById('submit-button');
+            $(document).ready(function() {
+                // GET FORM DATA
+                var $form = $('#edit-form');
+                var $submitButton = $('#submit-button');
 
-            // Maak een kopie om te vergelijken (of er iets gewijzigd is)
-            var formData = new FormData(form);
+                // DISABLE SUBMIT
+                $submitButton.prop('disabled', true);
 
-            // Zet 'submit' knop uit (tot er daadwerkelijk iets veranderd is)
-            submitButton.disabled = true;
+                // Store initial form data
+                var initialFormData = $form.serialize();
 
-            // Event listener voor aanpassingen aan het formulier
-            form.addEventListener('input', function() {
-                var newFormData = new FormData(form);
-                for(var [key, val] of newFormData.entries()) {
-                    if(val != formData.get(key)) {
-                        submitButton.disabled = false;
-                        break;
+                // EVENT LISTENER FOR CHANGE
+                $form.on('change input', function() {
+                    var currentFormData = $form.serialize();
+
+                    // Check if the form data has changed
+                    if (initialFormData !== currentFormData) {
+                        $submitButton.prop('disabled', false);
+                    } else {
+                        $submitButton.prop('disabled', true);
                     }
-                }
-            });
+                });
 
-            // Event listener voor het indienen van het formulier
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
+                // EVENT LISTENER FOR SUBMIT
+                $form.on('submit', function(event) {
+                    event.preventDefault();
 
-                // Zet de knop uit
-                submitButton.disabled = true;
+                    // DISABLE SUBMIT
+                    $submitButton.prop('disabled', true);
 
-                // AJAX request
-                var xhr = new XMLHttpRequest();
-                xhr.open(form.method, form.action);
-                xhr.onreadystatechange = function() {
-                    if(xhr.readyState == 4 && xhr.status == 200) {
-                        formData = new FormData(form);
-                        submitButton.innerHTML = '> Aanpassing voltooid..';
-                        setTimeout(function() {
-                            submitButton.disabled = true;
-                            submitButton.innerHTML = 'Indienen';
-                        }, 3000);
-                    }
-                    else if(xhr.readyState == 4) {
-                        submitButton.innerHTML = '> Aanpassing mislukt..';
-                        setTimeout(function() {
-                            submitButton.disabled = true;
-                            submitButton.innerHTML = 'Indienen';
-                        }, 3000);
-                    }
-                }
-                xhr.send(new FormData(form));
+                    // AJAX REQUEST
+                    $.ajax({
+                        url: $form.attr('action'),
+                        type: $form.attr('method'),
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        success: function() {
+                            $submitButton.html('<span class="fst-italic">Aanpassing voltooid..</span>');
+                            setTimeout(function() {
+                                $submitButton.prop('disabled', true);
+                                $submitButton.html('<span class="fw-bold">Indienen<span>');
+                            }, 3000);
+                        },
+                        error: function() {
+                            $submitButton.html('<span class="fst-italic">Aanpassing mislukt..</span>');
+                            setTimeout(function() {
+                                $submitButton.prop('disabled', true);
+                                $submitButton.html('<span class="fw-bold">Indienen<span>');
+                            }, 3000);
+                        }
+                    });
+                });
             });
 
             // GO BACK
             function goBack() {
-               window.history.back();
+                window.location.href = 'account_admin.php';
             }
         </script>
-        <!-- /SCRIPT -->
+        <!-- /EDIT FORM SCRIPT -->
 
 <?php
-    // CLEAN UP
-    if(isset($connection)) {
-        unset($connection);
-    }
-    require_once ('../site/site_footer.php');
+// CLEAN UP
+$stmt = null;
+$pdo = null;
+
+require_once('../site/site_footer.php');
 ?>

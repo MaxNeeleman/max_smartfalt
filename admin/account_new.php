@@ -5,29 +5,30 @@
     }
 
     // LOAD WEBSITE
+    $admin_page_title = '<a href="../index.php">Smartfalt</a> > <a href="index.php">Admin</a> > Account Aanmaken';
     require_once ('../config.php');
-    $page_Title = "Smartfalt - Admin - Account Aanmaken";
-    $admin_page_title = '<a href="../index.php">Smartfalt</a> - <a href="index.php">Admin</a> - Account Aanmaken';
-    require_once ('../site/site_admin_header.php');
+    require_once ('../site/site_header_admin.php');
     require_once ('../db/connect_' . $_SERVER['SERVER_NAME'] . '.php');
+    require_once ('../db/db_connect.php');
 
-    // CONNECT NAAR DB
+
+    // CONNECT DB
     try {
-        $connection = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch(PDOException $e) {
         $_SESSION['error_message'] = "ERROR: Kan geen verbinding met de database maken. " . $e->getMessage();
         header("Location: account_error.php");
         exit();
     }
 
-    // SUBMIT GEGEVENS
+    // SUBMIT DATA
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
-            // SQL statement
-            $sql = "INSERT INTO `accounts` (`Username`, `Password`, `Firstname`, `Lastname`, `Gender`, `Address`, `Zip`, `City`, `Country`, `DOB`, `Mail`, `Phone`, `IBAN`) VALUES (:username, :password, :firstname, :lastname, :gender, :address, :zip, :city, :country, :dob, :mail, :phone, :iban)";
+            // SQL STATEMENT
+            $sql = "INSERT INTO `accounts` (`Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Adres`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `IBAN`, `RolId`) VALUES (:username, :password, :firstname, :lastname, :gender, :address, :city, :zip, :dob, :mail, :phone, :iban, :role)";
 
-            $stmt = $connection->prepare($sql);
+            $stmt = $pdo->prepare($sql);
 
             $stmt->bindParam(':username', $_POST['username'], PDO::PARAM_STR);
             $stmt->bindParam(':password', $_POST['password'], PDO::PARAM_STR);
@@ -35,108 +36,125 @@
             $stmt->bindParam(':lastname', $_POST['lastname'], PDO::PARAM_STR);
             $stmt->bindParam(':gender', $_POST['gender'], PDO::PARAM_STR);
             $stmt->bindParam(':address', $_POST['address'], PDO::PARAM_STR);
-            $stmt->bindParam(':zip', $_POST['zip'], PDO::PARAM_STR);
             $stmt->bindParam(':city', $_POST['city'], PDO::PARAM_STR);
-            $stmt->bindParam(':country', $_POST['country'], PDO::PARAM_STR);
+            $stmt->bindParam(':zip', $_POST['zip'], PDO::PARAM_STR);
             $stmt->bindParam(':dob', $_POST['dob'], PDO::PARAM_STR);
             $stmt->bindParam(':mail', $_POST['mail'], PDO::PARAM_STR);
             $stmt->bindParam(':phone', $_POST['phone'], PDO::PARAM_STR);
             $stmt->bindParam(':iban', $_POST['iban'], PDO::PARAM_STR);
+            $stmt->bindParam(':role', $_POST['role'], PDO::PARAM_STR);
 
-            // Execute statement
+            // EXECUTE STATEMENT
             $stmt->execute();
             echo "New record created successfully.";
         } catch(PDOException $e) {
-            die("ERROR: Could not execute $sql. " . $e->getMessage());
+            $_SESSION['error_message'] = "ERROR: Kan onderstaande statement niet uitvoeren.<br>$sql" . $e->getMessage();
+            header("Location: account_error.php");
+            exit();
         }
     }
 ?>
 
-        <!-- FORM -->
+        <!-- ACCOUNT NEW FORM -->
         <div class="container bg-cornflower rounded-3 my-5 p-3">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="form-group">
-                    <label for="username"><strong>Gebruikersnaam</strong>:</label>
-                    <input type="text" class="form-control border-dark" id="username" name="username">
+                    <label for="username"><span class="fw-bold">Gebruikersnaam<span>:</label>
+                    <input type="text" class="form-control border-dark" id="username" name="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="firstname"><strong>Wachtwoord</strong>:</label>
-                    <input type="password" class="form-control border-dark" id="password" name="password">
+                    <label for="firstname"><span class="fw-bold">Wachtwoord<span>:</label>
+                    <input type="password" class="form-control border-dark" id="password" name="password" required>
                 </div>
                 <div class="form-group">
-                    <label for="firstname"><strong>Voornaam</strong>:</label>
-                    <input type="text" class="form-control border-dark" id="firstname" name="firstname">
+                    <label for="firstname"><span class="fw-bold">Voornaam<span>:</label>
+                    <input type="text" class="form-control border-dark" id="firstname" name="firstname" required>
                 </div>
                 <div class="form-group">
-                    <label for="lastname"><strong>Achternaam</strong>:</label>
-                    <input type="text" class="form-control border-dark" id="lastname" name="lastname">
+                    <label for="lastname"><span class="fw-bold">Achternaam<span>:</label>
+                    <input type="text" class="form-control border-dark" id="lastname" name="lastname" required>
                 </div>
                 <div class="form-group">
-                    <label for="gender"><strong>Geslacht</strong>:</label>
+                    <label for="gender"><span class="fw-bold">Geslacht<span>:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender-m" value="M">
+                        <input class="form-check-input" type="radio" name="gender" id="gender-m" value="m">
                         <label class="form-check-label" for="gender-m">M (Man)</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender-f" value="F">
+                        <input class="form-check-input" type="radio" name="gender" id="gender-f" value="v">
                         <label class="form-check-label" for="gender-f">F (Vrouw)</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender-x" value="X">
+                        <input class="form-check-input" type="radio" name="gender" id="gender-x" value="x">
                         <label class="form-check-label" for="gender-x">X (Anders)</label>
                     </div>
-                    </div>
-                                <div class="form-group">
-                    <label for="address"><strong>Adres</strong>:</label>
+                </div>
+                    <div class="form-group">
+                    <label for="address"><span class="fw-bold">Adres<span>:</label>
                     <input type="text" class="form-control border-dark" id="address" name="address">
                 </div>
                 <div class="form-group">
-                    <label for="zip"><strong>Postcode</strong>:</label>
+                    <label for="zip"><span class="fw-bold">Postcode<span>:</label>
                     <input type="text" class="form-control border-dark" id="zip" name="zip">
                 </div>
                 <div class="form-group">
-                    <label for="city"><strong>Woonplaats</strong>:</label>
+                    <label for="city"><span class="fw-bold">Woonplaats<span>:</label>
                     <input type="text" class="form-control border-dark" id="city" name="city">
                 </div>
                 <div class="form-group">
-                    <label for="city"><strong>Country</strong>:</label>
-                    <input type="text" class="form-control border-dark" id="country" name="country">
-                </div>
-                <div class="form-group">
-                    <label for="dob"><strong>Geboortedatum</strong>:</label>
+                    <label for="dob"><span class="fw-bold">Geboortedatum<span>:</label>
                     <input type="date" class="form-control border-dark" id="dob" name="dob">
                 </div>
                 <div class="form-group">
-                    <label for="mail"><strong>E-Mailadres</strong>:</label>
-                    <input type="text" class="form-control border-dark" id="mail" name="mail">
+                    <label for="mail"><span class="fw-bold">E-Mailadres<span>:</label>
+                    <input type="text" class="form-control border-dark" id="mail" name="mail" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone"><strong>Telefoonnummer</strong>:</label>
-                    <input type="text" class="form-control border-dark" id="phone" name="phone">
+                    <label for="phone"><span class="fw-bold">Telefoonnummer<span>:</label>
+                    <input type="text" class="form-control border-dark" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone"><strong>IBAN</strong>:</label>
+                    <label for="phone"><span class="fw-bold">IBAN<span>:</label>
                     <input type="text" class="form-control border-dark" id="iban" name="iban">
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-selective border border-dark my-2 font-weight-bold" name="submit" value="Indienen">
-                    <button type="button" class="btn btn-selective border border-dark m-2" onclick="goBack()"><strong>Terug</strong></button>
+                    <label for="role"><span class="fw-bold">Rol<span>:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role-1" value="1" required>
+                        <label class="form-check-label" for="role-m">Administrator</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role-2" value="2" required>
+                        <label class="form-check-label" for="role-f">Medewerker</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role-3" value="3" required>
+                        <label class="form-check-label" for="role-x">Klant</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role-4" value="4" required>
+                        <label class="form-check-label" for="role-x">Levernancier</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-selective border border-dark my-2 fw-bold" name="submit" value="Indienen">
+                    <button type="button" class="btn btn-selective border border-dark m-2 fw-bold" onclick="goBack()">Terug</button>
                 </div>
             </form>
         </div>
-        <!-- /FORM -->
+        <!-- /ACCOUNT NEW FORM -->
 
-        <!-- SCRIPTS -->
+        <!-- ACCOUNT NEW SCRIPTS -->
         <script>
             // GO BACK
             function goBack() {
-               window.history.back();
+                window.location.href = 'account_admin.php';
             }
         </script>
-        <!-- /SCRIPTS -->
+        <!-- /ACCOUNT NEW SCRIPTS -->
 
 <?php
     // CLEAN UP
-    unset($connection);
+    unset($pdo);
     require_once ('../site/site_footer.php');
 ?>

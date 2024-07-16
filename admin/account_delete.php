@@ -5,33 +5,25 @@
     }
 
     // LOAD WEBSITE
+    $page_title = 'Smartfalt - Admin - Account Verwijderen';
     $admin_page_title = '<a href="../index.php">Smartfalt</a> > <a href="index.php">Admin</a> > Account Verwijderen';
     require_once ('../config.php');
-    require_once ('../site/site_admin_header.php');
+    require_once ('../site/site_header_admin.php');
     require_once ('../db/connect_' . $_SERVER['SERVER_NAME'] . '.php');
+    require_once ('../db/db_connect.php');
 
-    // CHECK ID
+    // GET SUBMITTED ID
     if (!isset($_GET['id'])) {
         $_SESSION['error_message'] = "Geen account geselecteerd om te verwijderen.";
         header("Location: account_error.php");
         exit;
-    }
-
-    $id = $_GET['id'];
-
-    // CONNECT NAAR DB
-    try {
-        $connection = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-        $_SESSION['error_message'] = "Kan geen verbinding maken met de database: " . $e->getMessage();
-        header("Location: account_error.php");
-        exit;
+    } else {
+        $accountid = $_GET['id'];
     }
 
     // STATEMENT
-    $stmt = $connection->prepare("DELETE FROM `accounts` WHERE `Id` = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt = $pdo->prepare("DELETE FROM `accounts` WHERE `AccountId` = :accountid");
+    $stmt->bindParam(':accountid', $accountid, PDO::PARAM_INT);
 
     try {
         $stmt->execute();
@@ -42,14 +34,11 @@
         exit;
     }
 
-    // REDIRECT
-    header("Location: account_admin.php");
-    exit;
+    // // REDIRECT
+    // header("Location: account_admin.php");
+    // exit;
   
     // CLEAN UP
     $stmt = null;
-    $connection = null;
+    $pdo = null;
     require_once ('../site/site_footer.php');
-?>
-
-?>

@@ -10,7 +10,8 @@
     // Load Website
     // require_once __DIR__ .'site/site_header'; <-- is dit een oplossing? Gaat fout bij lokaal werken
     require_once('config.php');
+    require_once('db/db_connect.php');
     require_once('site/site_header.php');
     require_once('site/site_body.php');
     require_once('site/site_footer.php');
-?>
+

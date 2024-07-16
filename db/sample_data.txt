@@ -1,0 +1,145 @@
+-- Additional sample data for ACCOUNTS
+INSERT INTO `ACCOUNTS` (`Gebruikersnaam`, `Wachtwoord`, `Voornaam`, `Achternaam`, `Geslacht`, `Adres`, `Woonplaats`, `Postcode`, `GebDatum`, `Emailadres`, `Telefoonnummer`, `IBAN`, `RolId`)
+VALUES 
+    ('admin1', 'password', 'Jan', 'Bosch', 'M', 'Stationsstraat 10', 'Amsterdam', '1012AB', '1980-10-12', 'admin1@email.com', '0612345678', 'NL02ABNA0123456789', 1),
+    ('admin2', 'password', 'Bram', 'Vries', 'M', 'Kerkstraat 5', 'Rotterdam', '3001DA', '1981-12-15', 'admin2@email.com', '0612345679', 'NL02ABNA0123456790', 1),
+    
+    ('employee1', 'password', 'Sara', 'Jansen', 'F', 'Dorpstraat 20', 'Utrecht', '3511AC', '1985-04-24', 'employee1@email.com', '0612345670', 'NL02ABNA0123456701', 2),
+    ('employee2', 'password', 'Pieter', 'Bakker', 'M', 'Hoofdstraat 30', 'Eindhoven', '5611GP', '1986-08-10', 'employee2@email.com', '0612345671', 'NL02ABNA0123456712', 2),
+    ('employee3', 'password', 'Lotte', 'Berg', 'F', 'Brugstraat 25', 'Tilburg', '5038AB', '1987-07-13', 'employee3@email.com', '0612345672', 'NL02ABNA0123456723', 2),
+    ('employee4', 'password', 'Bart', 'Koning', 'M', 'Burchtstraat 30', 'Almere', '1312AC', '1988-06-15', 'employee4@email.com', '0612345673', 'NL02ABNA0123456734', 2),
+    ('employee5', 'password', 'Julia', 'Meijer', 'F', 'Kruisstraat 35', 'Breda', '4811AT', '1989-05-17', 'employee5@email.com', '0612345674', 'NL02ABNA0123456745', 2),
+    ('employee6', 'password', 'Lucas', 'Koopman', 'M', 'Zijlstraat 40', 'Nijmegen', '6511MD', '1990-04-19', 'employee6@email.com', '0612345675', 'NL02ABNA0123456756', 2),
+    
+    ('customer1', 'password', 'Lisa', 'Smit', 'F', 'Schoolstraat 40', 'Groningen', '9711JP', '1990-01-05', 'customer1@email.com', '0612345676', 'NL02ABNA0123456767', 3),
+    ('customer2', 'password', 'Tom', 'Meer', 'M', 'Kanaalstraat 50', 'Maastricht', '6211KJ', '1991-02-12', 'customer2@email.com', '0612345677', 'NL02ABNA0123456778', 3),
+    ('customer3', 'password', 'Sophie', 'Dekker', 'F', 'Langestraat 45', 'Apeldoorn', '7311AB', '1992-03-14', 'customer3@email.com', '0612345678', 'NL02ABNA0123456789', 3),
+    ('customer4', 'password', 'Ruben', 'Mol', 'M', 'Bosstraat 50', 'Haarlem', '2011ZC', '1993-04-16', 'customer4@email.com', '0612345679', 'NL02ABNA0123456790', 3),
+    ('customer5', 'password', 'Mila', 'Dijkstra', 'F', 'Veemarkt 55', 'Arnhem', '6811AH', '1994-05-18', 'customer5@email.com', '0612345670', 'NL02ABNA0123456701', 3),
+    ('customer6', 'password', 'Max', 'Beek', 'M', 'Korenmarkt 60', 'Zwolle', '8011KW', '1995-06-20', 'customer6@email.com', '0612345671', 'NL02ABNA0123456712', 3),
+    ('customer7', 'password', 'Noah', 'Willems', 'M', 'Singel 90', 'Den Bosch', '5211KC', '1996-07-01', 'customer7@email.com', '0612345677', 'NL02ABNA0123456778', 3),
+    ('customer8', 'password', 'Nora', 'Jacobs', 'F', 'Herengracht 95', 'Zoetermeer', '2711AB', '1997-08-04', 'customer8@email.com', '0612345678', 'NL02ABNA0123456789', 3),
+    ('customer9', 'password', 'Finn', 'Martens', 'M', 'Prinsengracht 100', 'Haarlem', '2011AA', '1998-09-05', 'customer9@email.com', '0612345679', 'NL02ABNA0123456790', 3),
+    ('customer10', 'password', 'Olivia', 'Klein', 'F', 'Bloemgracht 105', 'Amstelveen', '1181ZM', '1999-10-06', 'customer10@email.com', '0612345670', 'NL02ABNA0123456701', 3),
+    ('customer11', 'password', 'Liam', 'Vos', 'M', 'Leliegracht 110', 'Veenendaal', '3901RJ', '2000-11-07', 'customer11@email.com', '0612345671', 'NL02ABNA0123456712', 3),
+    ('customer12', 'password', 'Mia', 'Lange', 'F', 'Reguliersgracht 115', 'Hilversum', '1211AB', '2001-12-08', 'customer12@email.com', '0612345672', 'NL02ABNA0123456723', 3),
+    ('customer13', 'password', 'Elijah', 'Meer', 'M', 'Singel 120', 'Harderwijk', '3841AC', '2002-01-09', 'customer13@email.com', '0612345673', 'NL02ABNA0123456734', 3),
+    ('customer14', 'password', 'Ava', 'Vermeulen', 'F', 'Herengracht 125', 'Emmen', '7811AA', '2003-02-10', 'customer14@email.com', '0612345674', 'NL02ABNA0123456745', 3),
+    ('customer15', 'password', 'Lucas', 'Maas', 'M', 'Prinsengracht 130', 'Alphen aan den Rijn', '2405AD', '2004-03-11', 'customer15@email.com', '0612345675', 'NL02ABNA0123456756', 3),
+    ('customer16', 'password', 'Isabella', 'Smit', 'F', 'Bloemgracht 135', 'Gouda', '2801ZJ', '2005-04-12', 'customer16@email.com', '0612345676', 'NL02ABNA0123456767', 3),
+    ('customer17', 'password', 'Aiden', 'Jansen', 'M', 'Leliegracht 140', 'Venlo', '5911KB', '2006-05-13', 'customer17@email.com', '0612345677', 'NL02ABNA0123456778', 3),
+    ('customer18', 'password', 'Sophia', 'Bos', 'F', 'Reguliersgracht 145', 'Zoetermeer', '2711AA', '2007-06-14', 'customer18@email.com', '0612345678', 'NL02ABNA0123456789', 3),
+    ('customer19', 'password', 'Sebastian', 'Blok', 'M', 'Singel 150', 'Maastricht', '6211CD', '2008-07-15', 'customer19@email.com', '0612345679', 'NL02ABNA0123456790', 3),
+    ('customer20', 'password', 'Charlotte', 'Stam', 'F', 'Herengracht 155', 'Hoorn', '1621AC', '2009-08-16', 'customer20@email.com', '0612345670', 'NL02ABNA0123456701', 3),
+    ('customer21', 'password', 'Jack', 'Koning', 'M', 'Prinsengracht 160', 'Dordrecht', '3311JD', '2010-09-17', 'customer21@email.com', '0612345671', 'NL02ABNA0123456712', 3),
+    ('customer22', 'password', 'Amelia', 'Visser', 'F', 'Bloemgracht 165', 'Enschede', '7511DA', '2011-10-18', 'customer22@email.com', '0612345672', 'NL02ABNA0123456723', 3),
+    ('customer23', 'password', 'Henry', 'Dekker', 'M', 'Leliegracht 170', 'Leeuwarden', '8911JC', '2012-11-19', 'customer23@email.com', '0612345673', 'NL02ABNA0123456734', 3),
+    ('customer24', 'password', 'Evelyn', 'Hendriks', 'F', 'Reguliersgracht 175', 'Zaanstad', '1506BA', '2013-12-20', 'customer24@email.com', '0612345674', 'NL02ABNA0123456745', 3),
+    ('customer25', 'password', 'Gabriel', 'Kuiper', 'M', 'Singel 180', 'Hilversum', '1211AB', '2014-01-21', 'customer25@email.com', '0612345675', 'NL02ABNA0123456756', 3),
+    ('customer26', 'password', 'Victoria', 'Mol', 'F', 'Herengracht 185', 'Arnhem', '6811AD', '2015-02-22', 'customer26@email.com', '0612345676', 'NL02ABNA0123456767', 3),
+    ('customer27', 'password', 'Theo', 'Verhoeven', 'M', 'Prinsengracht 190', 'Alkmaar', '1811KR', '2016-03-23', 'customer27@email.com', '0612345677', 'NL02ABNA0123456778', 3),
+    ('customer28', 'password', 'Mila', 'Veldhuis', 'F', 'Bloemgracht 195', 'Venray', '5801AJ', '2017-04-24', 'customer28@email.com', '0612345678', 'NL02ABNA0123456789', 3),
+    ('customer29', 'password', 'Felix', 'Vandermeer', 'M', 'Leliegracht 200', 'Sittard', '6131JP', '2018-05-25', 'customer29@email.com', '0612345679', 'NL02ABNA0123456790', 3),
+
+    ('supplier1', 'password', 'Fleur', 'Mulder', 'F', 'Molenstraat 60', 'Leeuwarden', '8911JK', '1983-05-31', 'supplier1@email.com', '0612345672', 'NL02ABNA0123456723', 4),
+    ('supplier2', 'password', 'Mark', 'Groot', 'M', 'Marktstraat 70', 'Nijmegen', '6511PD', '1984-07-17', 'supplier2@email.com', '0612345673', 'NL02ABNA0123456734', 4),
+    ('supplier3', 'password', 'Lara', 'Brouwer', 'F', 'Steenstraat 75', 'Amersfoort', '3811ED', '1985-08-22', 'supplier3@email.com', '0612345674', 'NL02ABNA0123456745', 4),
+    ('supplier4', 'password', 'Levi', 'Boer', 'M', 'Vismarkt 80', 'Enschede', '7511DZ', '1986-09-24', 'supplier4@email.com', '0612345675', 'NL02ABNA0123456756', 4),
+    ('supplier5', 'password', 'Emma', 'Kramer', 'F', 'Jansbinnensingel 85', 'Zaanstad', '6811AJ', '1987-10-26', 'supplier5@email.com', '0612345676', 'NL02ABNA0123456767', 4);
+
+
+-- Additional sample data for BESTELLINGEN
+INSERT INTO `BESTELLINGEN` (`AccountId`, `Besteldatum`, `TypeId`)
+VALUES 
+    ('00000037', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000037', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000038', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000038', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000038', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000038', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000038', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000039', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000040', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000040', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000041', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000041', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000044', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000045', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000045', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000047', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000048', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000048', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000048', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000048', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000049', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000050', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000051', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000052', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000052', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000052', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000057', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000059', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000059', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000059', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000060', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4)),
+    ('00000061', DATE_SUB(CURRENT_DATE, INTERVAL FLOOR(RAND() * 730) DAY), FLOOR(1 + RAND() * 4))
+
+
+-- Additional sample data for ABONNEMENTEN
+INSERT INTO `ABONNEMENTEN` (`AbonnementId`, `IngangsDatum`, `Actief`, `BestellingId`)
+VALUES
+    (1, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 1),
+    (2, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 2),
+    (3, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 3),
+    (4, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 4),
+    (5, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 5),
+    (6, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 6),
+    (7, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 7),
+    (8, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 8),
+    (9, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 9),
+    (10, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 10),
+    (11, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 11),
+    (12, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 12),
+    (13, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 13),
+    (14, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 14),
+    (15, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 15),
+    (16, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 16),
+    (17, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 17),
+    (18, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 18),
+    (19, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 19),
+    (20, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 20),
+    (21, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 21),
+    (22, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 22),
+    (23, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 23),
+    (24, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 24),
+    (25, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 25),
+    (26, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 26),
+    (27, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 27),
+    (28, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 28),
+    (29, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 29),
+    (30, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 30),
+    (31, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 31),
+    (32, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 32),
+    (33, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 33),
+    (34, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 34),
+    (35, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 35),
+    (36, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 36),
+    (37, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 37),
+    (38, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 38),
+    (39, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 39),
+    (40, DATE_ADD(CURRENT_DATE, INTERVAL FLOOR(RAND() * 365) DAY), true, 40),
+
+
+
+-- Additional sample data for INCASSOS
+INSERT INTO INCASSOS (IncassoId, BankAkkoord, AbonnementId) VALUES 
+INSERT INTO `INCASSOS` (`BankAkkoord`, `AbonnementId`)
+SELECT true, `AbonnementId`
+FROM `ABONNEMENTEN`
+WHERE `AbonnementId` <= 40,
+
+-- Additional sample data for FACTUREN
+INSERT INTO `FACTUREN` (`FactuurDatum`, `FactuurBedrag`, `Voldaan`, `BestellingId`)
+SELECT `Besteldatum`, `Prijs`, true, `BestellingId`
+FROM `BESTELLINGEN` JOIN `ABONNEMENTTYPES` ON `BESTELLINGEN`.`TypeId` = `ABONNEMENTTYPES`.`TypeId`
+WHERE `BestellingId` <= 40,

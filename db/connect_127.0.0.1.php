@@ -1,7 +1,6 @@
 <?php
-// Maak verbinding met de database
-define( 'DB_HOST', 'localhost' );
-define( 'DB_NAME', 'smartfalt' );
-define( 'DB_USER', 'root' );
-define( 'DB_PASS', '' );
-?>
+// CONNECT TO DB
+const DB_HOST = 'localhost';
+const DB_NAME = 'smartfalt';
+const DB_USER = 'root';
+const DB_PASS = '';

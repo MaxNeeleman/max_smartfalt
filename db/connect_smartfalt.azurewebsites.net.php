@@ -1,7 +1,6 @@
 <?php
-// Maak verbinding met de database
-define( 'DB_HOST', '' );
-define( 'DB_NAME', '' );
-define( 'DB_USER', '' );
-define( 'DB_PASS', '' );
-?>
+// CONNECT DB
+const DB_HOST = $_ENV['DB_HOST'];
+const DB_NAME = $_ENV['DB_NAME'];
+const DB_USER = $_ENV['DB_USER'];
+const DB_PASS = $_ENV['DB_PASS'];

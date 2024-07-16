@@ -1,10 +1,35 @@
-// ONTHOUD VORIGE WAARDES
-let missieOldText = document.getElementById('missie').innerHTML;
-let visieOldText = document.getElementById('visie').innerHTML;
-let strategieOldText = document.getElementById('strategie').innerHTML;
+// AJAX LOGIN (MODAL IN HEADER)
+$(document).ready(function(){
+  $('#loginModal form').on('submit', function(e) {
+      e.preventDefault();
+      var url = $(this).attr('action');
+      $.ajax({
+          type: 'POST',
+          url: url,
+          data: $(this).serialize(),
+          dataType: 'json',
+          success: function(response) {
+              if(response.error) {
+                  // WRONG PASSOWRD
+                  $('.alert-danger').text(response.error).show();
+              } else {
+                  // CORRECT PASSWORD
+                  location.reload();
+              }
+          }
+      });
+  });
+});
+// /AJAX LOGIN (MODAL IN HEADER)
 
-// AJAX MISSIE
-function loadMissie() {
+// STATEMENT
+  // ONTHOUD VORIGE WAARDES
+  let missieOldText = document.getElementById("missie").innerText;
+  let visieOldText = document.getElementById("visie").innerText;
+  let strategieOldText = document.getElementById("strategie").innerText;
+  
+  // AJAX MISSIE
+  function loadMissie() {
     document.getElementById("btnMissie").style.display = "none";
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -13,16 +38,17 @@ function loadMissie() {
     xhttp.open("GET", "site/ajax_missie.html", true);
     xhttp.send();
     document.getElementById("btnMissieBack").style.display = "block";
-}
+  }
 
-function unloadMissie() {
+  function unloadMissie() {
     document.getElementById("btnMissieBack").style.display = "none";
     document.getElementById("missie").innerHTML = missieOldText;
     document.getElementById("btnMissie").style.display = "block";
-}
+  }
+  // /AJAX MISSIE
 
-// AJAX VISIE
-function loadVisie() {
+  // AJAX VISIE
+  function loadVisie() {
     document.getElementById("btnVisie").style.display = "none";
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -31,16 +57,17 @@ function loadVisie() {
     xhttp.open("GET", "site/ajax_visie.html", true);
     xhttp.send();
     document.getElementById("btnVisieBack").style.display = "block";
-}
+  }
 
-function unloadVisie() {
+  function unloadVisie() {
     document.getElementById("btnVisieBack").style.display = "none";
     document.getElementById("visie").innerHTML = visieOldText;
     document.getElementById("btnVisie").style.display = "block";
-}
+  }
+  // /AJAX VISIE
 
-// AJAX STRATEGIE
-function loadStrategie() {
+  // AJAX STRATEGIE
+  function loadStrategie() {
     document.getElementById("btnStrategie").style.display = "none";
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -49,114 +76,116 @@ function loadStrategie() {
     xhttp.open("GET", "site/ajax_strategie.html", true);
     xhttp.send();
     document.getElementById("btnStrategieBack").style.display = "block";
-}
+  }
 
-function unloadStrategie() {
+  function unloadStrategie() {
     document.getElementById("btnStrategieBack").style.display = "none";
     document.getElementById("strategie").innerHTML = strategieOldText;
     document.getElementById("btnStrategie").style.display = "block";
-}
+  }
+  // /AJAX STRATEGIE
 
-// Event listeners
-document.getElementById('btnMissie').addEventListener('click', loadMissie);
-document.getElementById('btnMissieBack').addEventListener('click', unloadMissie);
-document.getElementById('btnVisie').addEventListener('click', loadVisie);
-document.getElementById('btnVisieBack').addEventListener('click', unloadVisie);
-document.getElementById('btnStrategie').addEventListener('click', loadStrategie);
-document.getElementById('btnStrategieBack').addEventListener('click', unloadStrategie);
-
+  // AJAX EVENT LISTENERS
+  document.getElementById('btnMissie').addEventListener('click', loadMissie);
+  document.getElementById('btnMissieBack').addEventListener('click', unloadMissie);
+  document.getElementById('btnVisie').addEventListener('click', loadVisie);
+  document.getElementById('btnVisieBack').addEventListener('click', unloadVisie);
+  document.getElementById('btnStrategie').addEventListener('click', loadStrategie);
+  document.getElementById('btnStrategieBack').addEventListener('click', unloadStrategie);
+  // /AJAX EVENT LISTENERS
+// /STATEMENT
 
 // CALCULATOR
-// BEGIN STARTPAKKET
-var startpakket = new Array();
-startpakket["startpakket1"] = 12500;
-startpakket["startpakket2"] = 15000;
+  // BEGIN STARTPAKKET
+  var startpakket = new Array();
+  startpakket["startpakket1"] = 12500;
+  startpakket["startpakket2"] = 15000;
 
-function getStartpakket() {
-  var startpakketRadio = document.getElementsByName("selectedpakket");
+  function getStartpakket() {
+    var startpakketRadio = document.getElementsByName("selectedpakket");
 
-  for (i = 0; i < startpakketRadio.length; i++) {
-    if (startpakketRadio[i].checked) {
-      user_input = startpakketRadio[i].value;
+    for (i = 0; i < startpakketRadio.length; i++) {
+      if (startpakketRadio[i].checked) {
+        user_input = startpakketRadio[i].value;
+      }
+    }
+
+    return startpakket[user_input];
+  }
+  // EIND STARTPAKKET
+
+  // BEGIN OPTIES
+  function getOptie1() {
+    var optie1 = document.getElementById("optie1");
+
+    if (optie1.checked) {
+      return 1000;
+    } else {
+      return 0;
     }
   }
 
-  return startpakket[user_input];
-}
-// EIND STARTPAKKET
+  function getOptie2() {
+    var optie2 = document.getElementById("optie2");
 
-// BEGIN OPTIES
-function getOptie1() {
-  var optie1 = document.getElementById("optie1");
-
-  if (optie1.checked) {
-    return 1000;
-  } else {
-    return 0;
+    if (optie2.checked) {
+      return 1000;
+    } else {
+      return 0;
+    }
   }
-}
 
-function getOptie2() {
-  var optie2 = document.getElementById("optie2");
+  function getOptie3() {
+    var optie3 = document.getElementById("optie3");
 
-  if (optie2.checked) {
-    return 1000;
-  } else {
-    return 0;
+    if (optie3.checked) {
+      return 1500;
+    } else {
+      return 0;
+    }
   }
-}
 
-function getOptie3() {
-  var optie3 = document.getElementById("optie3");
+  function getOptie4() {
+    var optie4 = document.getElementById("optie4");
 
-  if (optie3.checked) {
-    return 1500;
-  } else {
-    return 0;
+    if (optie4.checked) {
+      return 1500;
+    } else {
+      return 0;
+    }
   }
-}
+  // EIND OPTIES
 
-function getOptie4() {
-  var optie4 = document.getElementById("optie4");
+  // BEGIN KILOMETERS
+  var kilometers = new Array();
+  kilometers["none"] = 0;
+  kilometers["10"] = 10;
+  kilometers["20"] = 20;
+  kilometers["30"] = 30;
+  kilometers["40"] = 40;
+  kilometers["50"] = 50;
+  kilometers["60"] = 60;
+  kilometers["70"] = 70;
+  kilometers["80"] = 80;
+  kilometers["90"] = 90;
+  kilometers["100"] = 100;
 
-  if (optie4.checked) {
-    return 1500;
-  } else {
-    return 0;
+  function getKilometers() {
+    var kmSelect = document.getElementById('kilometers');
+
+    return kilometers[kmSelect.value];
   }
-}
-// EIND OPTIES
+  // EIND KILOMETERS
 
-// BEGIN KILOMETERS
-var kilometers = new Array();
-kilometers["none"] = 0;
-kilometers["10"] = 10;
-kilometers["20"] = 20;
-kilometers["30"] = 30;
-kilometers["40"] = 40;
-kilometers["50"] = 50;
-kilometers["60"] = 60;
-kilometers["70"] = 70;
-kilometers["80"] = 80;
-kilometers["90"] = 90;
-kilometers["100"] = 100;
+  // BEGIN BEREKENEN TOTAALPRIJS
+  function calculateTotal() {
+    var total = getKilometers() * (getStartpakket() + getOptie1() + getOptie2() + getOptie3() + getOptie4());
+    var totalEl = document.getElementById('totalPrice');
 
-function getKilometers() {
-  var kmSelect = document.getElementById('kilometers');
-
-  return kilometers[kmSelect.value];
-}
-// EIND KILOMETERS
-
-// BEGIN BEREKENEN TOTAALPRIJS
-function calculateTotal() {
-  var total = getKilometers() * (getStartpakket() + getOptie1() + getOptie2() + getOptie3() + getOptie4());
-  var totalEl = document.getElementById('totalPrice');
-
-  document.getElementById("totalPrice").innerHTML = "Totaalprijs: €" + total;
-  totalEl.style.display = "block";
-}
-// EIND BEREKENEN TOTAALPRIJS
+    document.getElementById("totalPrice").innerHTML = "Totaalprijs: €" + total;
+    totalEl.style.display = "block";
+  }
+  // EIND BEREKENEN TOTAALPRIJS
 // EIND CALCULATOR
 
 // MAPBOX: Voeg kaart en marker toe
